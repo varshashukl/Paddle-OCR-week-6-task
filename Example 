@@ -1,0 +1,6 @@
+from paddleocr import PaddleOCR
+
+ocr = PaddleOCR(use_angle_cls=True, lang='en')  # Initialize the model
+result = ocr.ocr('path/to/sample_image.jpg')    # Predict on a sample image
+for line in result:
+    print(line)
