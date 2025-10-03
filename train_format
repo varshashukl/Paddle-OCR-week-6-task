@@ -1,0 +1,13 @@
+import os
+
+image_folder = "images"
+labels_dict = {
+    "img_1.jpg": "hello",
+    "img_2.jpg": "world",
+    "img_3.jpg": "paddleocr"
+}
+
+with open("rec_gt_train.txt", "w", encoding="utf-8") as f:
+    for image_name, label in labels_dict.items():
+        f.write(f"{image_folder}/{image_name}\t{label}
+")
