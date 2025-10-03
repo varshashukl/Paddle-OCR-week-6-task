@@ -1,0 +1,40 @@
+import os
+
+def convert_to_paddleocr_format(image_folder, labels_dict, output_label_file):
+    """
+    Converts images and labels into PaddleOCR train format.
+    
+    Args:
+        image_folder (str): Path to folder containing images.
+        labels_dict (dict): Dictionary with image filenames as keys and text labels as values.
+        output_label_file (str): Path to output label file to be created.
+    """
+    # Open the output label file in write mode with UTF-8 encoding
+    with open(output_label_file, "w", encoding="utf-8") as f:
+        # Iterate over the dictionary containing image filenames and corresponding labels
+        for image_name, label in labels_dict.items():
+            # Construct relative path to the image inside the dataset folder
+            image_path = os.path.join(image_folder, image_name)
+            # Write a line with image path and label separated by a tab character
+            f.write(f"{image_path}\t{label}
+")
+
+# Example usage:
+if __name__ == "__main__":
+    # Folder where images are stored
+    image_folder = "images"
+    
+    # Dictionary mapping image filenames to their text labels
+    labels_dict = {
+        "img_1.jpg": "hello",
+        "img_2.jpg": "world",
+        "img_3.jpg": "paddleocr"
+    }
+    
+    # Output file where labels in PaddleOCR format will be saved
+    output_label_file = "rec_gt_train.txt"
+    
+    # Run the conversion to create the label file for PaddleOCR training
+    convert_to_paddleocr_format(image_folder, labels_dict, output_label_file)
+    
+    print(f"Label file '{output_label_file}' created successfully.")
